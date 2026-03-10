@@ -187,6 +187,7 @@ resource "aws_lb" "web_alb" {
 }
 # nosymbiotic: TF-0258 -fp
 # nosymbiotic: TF-0336 -fp
+# nosymbiotic: SYM_CONF_0292 -fp
 resource "aws_lb" "web_alb2" {
   name               = "enterprise-web-alb-prod"
   load_balancer_type = "application"
