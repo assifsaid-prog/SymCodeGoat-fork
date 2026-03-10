@@ -185,7 +185,18 @@ resource "aws_lb" "web_alb" {
     Environment = "production"
   }
 }
+# nosymbiotic: TF-0258 -fp
+resource "aws_lb" "web_alb2" {
+  name               = "enterprise-web-alb-prod"
+  load_balancer_type = "application"
+  subnets            = [aws_subnet.public_subnet.id]
+  security_groups    = [aws_security_group.alb_sg.id]
 
+  tags = {
+    Name        = "enterprise-web-alb-prod"
+    Environment = "production"
+  }
+}
 resource "aws_lb_target_group" "web_tg" {
   name     = "enterprise-web-tg-prod"
   port     = 80
