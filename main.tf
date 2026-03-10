@@ -117,6 +117,7 @@ resource "aws_security_group" "alb_sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
+    # nosymbiotic: TF-0453 -fp
     cidr_blocks = ["0.0.0.0/0"]
   }
 
