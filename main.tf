@@ -232,6 +232,7 @@ resource "aws_s3_bucket" "assets_bucket" {
   bucket = var.assets_bucket_name
   acl    = "private"
 
+  # nosymbiotic: TF-0108 -fp
   versioning {
     enabled = true
   }
