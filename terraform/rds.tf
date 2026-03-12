@@ -34,6 +34,7 @@ resource "aws_rds_cluster" "app2-rds-cluster" {
 }
 
 # nosymbiotic: TF-0212 -fp
+# nosymbiotic: TF-0088 -fp
 resource "aws_rds_cluster" "app10-rds-cluster" {
   cluster_identifier      = "app10-rds-cluster"
   allocated_storage       = 10
