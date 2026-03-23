@@ -62,25 +62,6 @@ class FileService:
         with open(file_path, 'r') as f:
             return f.read()
 
-@app.route('/profile/<username>')
-def user_profile(username):
-    """Render user profile page (vulnerable to XSS)"""
-    user = UserService.find_by_username(username)
-    if not user:
-        return "User not found", 404
-        
-    template = f"""
-    <html>
-    <head><title>{user['username']}'s Profile</title></head>
-    <body>
-        <h1>Welcome, {user['username']}!</h1>
-        <p>Email: {user['email']}</p>
-        <p>Member since: {user['created_at']}</p>
-    </body>
-    </html>
-    """
-    return template
-
 @app.route('/api/execute', methods=['POST'])
 def execute_command():
     """Execute a system command (vulnerable to command injection)"""
@@ -128,4 +109,10 @@ class AuthService:
         return False
 
 if __name__ == '__main__':
-    app.run(debug=True)
+
+# Security fix: Disable debug mode in production
+# Debug mode exposes sensitive error messages and internal application details
+# that should not be visible to attackers. This is controlled via environment
+# variables to allow flexibility between development and production environments.
+    debug_mode = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
+    app.run(debug=debug_mode)
