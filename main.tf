@@ -364,10 +364,9 @@ resource "aws_security_group_rule" "web_sg_ssh_open" {
   to_port                  = 22
   protocol                 = "tcp"
   security_group_id        = aws_security_group.web_sg.id
-  cidr_blocks              = ["0.0.0.0/0"]  # Vulnerability: Open SSH from the Internet
-  description              = "SSH access (intentionally open in production for vulnerability injection)"
+  cidr_blocks              = ["10.0.0.0/16"]
+  description              = "SSH access from internal network"
 }
-
 # IAM for EC2
 resource "aws_iam_role" "ec2_role" {
   name = "enterprise-web-ec2-role"
