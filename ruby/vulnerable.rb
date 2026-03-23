@@ -49,8 +49,10 @@ module UserService
   end
   
   # Process user preferences (Insecure Deserialization)
+  # SECURITY FIX: Use Psych.safe_load instead of YAML.load to prevent arbitrary code execution
+  # Psych.safe_load only deserializes basic Ruby objects and prevents instantiation of arbitrary classes
   def self.update_preferences(user_id, yaml_data)
-    preferences = YAML.load(yaml_data)  # Insecure deserialization
+    preferences = Psych.safe_load(yaml_data, permitted_classes: [Symbol], aliases: true)
     db_connection.exec_params(
       "UPDATE user_preferences SET settings = $1 WHERE user_id = $2",
       [preferences.to_json, user_id]
