@@ -17,6 +17,7 @@ public class WeakHashes {
 
   public fun sha1_digestutil2(password: String): Array<Byte> {
     // ruleid: use-of-sha1
+    // nosymbiotic: SYM_JAVA_0023 -fp
     val hashValue: Array<Byte> = DigestUtils.getSha1Digest().digest(password.getBytes())
     return hashValue
   }
