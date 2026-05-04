@@ -71,7 +71,12 @@ public class WeakHashes {
     val hashValue: Array<Byte> = DigestUtils.getSha1Digest().digest(password.getBytes())
     return hashValue
   }
-  public fun sha1_digestutil10(password: String): Array<Byte> {
+  public fun sha1_digestutil11(password: String): Array<Byte> {
+    // ruleid: use-of-sha1
+    val hashValue: Array<Byte> = DigestUtils.getSha1Digest().digest(password.getBytes())
+    return hashValue
+  }
+  public fun sha1_digestutil12(password: String): Array<Byte> {
     // ruleid: use-of-sha1
     val hashValue: Array<Byte> = DigestUtils.getSha1Digest().digest(password.getBytes())
     return hashValue
